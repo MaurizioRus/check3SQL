@@ -1,0 +1,38 @@
+
+/*Given the following table: Pet(
+  microchipId VARCHAR(256) PRIMARY KEY,
+  name VARCHAR(64),
+  animalType VARCHAR(32),
+  ownerId INTEGER FOREIGN KEY REFERENCES PetOwner(id)
+  )
+  PetOwner (
+  id INTEGER PRIMARY KEY,
+  name VARCHAR(64) )
+  Write the following queries:
+  1. Insert a Pet entry with random values.
+  2. Select all owners that own a cat (animalType == “cat”).
+  3. Report the count of pets for each owner.
+*/
+
+
+
+1)
+INSERT INTO Pet(microchipId , name , animalType , ownerId)
+Values(
+        'random_microchip_id' ,
+        'random_animal_type' ,
+        'random_name' ,
+        'random_owner_id);
+
+2)
+SELECT PO.name
+FROM Pet pt
+INNER JOIN PetOwner PO ON pt.ownerId = PO.id
+WHERE pt.animalType == "cat";
+
+
+3)
+SELECT PO.name COUNT(pt.microchipId)
+FROM Pet pt
+INNER JOIN PetOwner PO ON pt.ownerId = PO.id
+GROUP BY PO.name;
